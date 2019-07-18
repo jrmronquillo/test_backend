@@ -59,6 +59,18 @@ def rssTest():
     
     return jsonify(title=testArr)
 
+# server-side handling of rss feeds
+def rssFeedConverter():
+    url="https://news.google.com/news/rss"
+    data = feedparser.parse(url)
+    print data['feed']['title']
+    print len(data['entries'])
+    for article in data['entries']:
+        article.title + ":" + article.link
+    
+    return data['entries']
+
+
 
 @app.errorhandler(404)
 def page_not_found(e):

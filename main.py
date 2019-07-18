@@ -7,6 +7,8 @@ import string
 import urllib2
 
 
+from handlers.decorators import support_jsonp
+
 import httplib2
 import json
 from flask import make_response
@@ -47,7 +49,7 @@ def main():
 
 
 @app.route('/rssTest')
-# @support_jsonp 
+@support_jsonp 
 def rssTest():
     print rssFeedConverter()
     fullData= rssFeedConverter()

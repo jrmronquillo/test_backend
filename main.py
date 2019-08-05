@@ -51,8 +51,8 @@ def main():
 @app.route('/rssTest')
 @support_jsonp 
 def rssTest():
-    print rssFeedConverter()
-    fullData= rssFeedConverter()
+    # print rssFeedConverter()
+    fullData= rssFeedConverter("https://news.google.com/news/rss")
     testArr = []
     for item in fullData:
         print item.title
@@ -61,9 +61,23 @@ def rssTest():
     
     return jsonify(title=testArr)
 
+@app.route('/espnFeed')
+def espnFeed():
+    # print rssFeedConverter()
+    fullData= rssFeedConverter("https://www.espn.com/espn/rss/news")
+    testArr = []
+    for item in fullData:
+        print item.title
+        testArr.append(item.title)
+    # testArr = ['test', 'test2']
+    
+    return jsonify(title=testArr)
+
+
+
 # server-side handling of rss feeds
-def rssFeedConverter():
-    url="https://news.google.com/news/rss"
+def rssFeedConverter(url):
+    test_url="https://news.google.com/news/rss"
     data = feedparser.parse(url)
     print data['feed']['title']
     print len(data['entries'])
